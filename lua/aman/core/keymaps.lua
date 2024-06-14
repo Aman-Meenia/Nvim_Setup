@@ -31,8 +31,13 @@ keymap.set("n", "<leader>tn", "<cmd>tabn<CR>", { desc = "Go to next tab" }) --  
 keymap.set("n", "<leader>tp", "<cmd>tabp<CR>", { desc = "Go to previous tab" }) --  go to previous tab
 keymap.set("n", "<leader>tf", "<cmd>tabnew %<CR>", { desc = "Open current buffer in new tab" }) --  move current buffer to new tab
 -- Keymap to move up and down in insert mode
-vim.keymap.set("i", "<C-h>", "<left>")
-vim.keymap.set("i", "<C-l>", "<right>")
-vim.keymap.set("i", "<C-j>", "<down>")
-vim.keymap.set("i", "<C-k>", "<up>")
+vim.keymap.set("i", "<C-h>", "<left>", { desc = "Move left in insert mode" })
+vim.keymap.set("i", "<C-l>", "<right>", { desc = "Move right in insert mode" })
+vim.keymap.set("i", "<C-j>", "<down>", { desc = "Move down in insert mode" })
+vim.keymap.set("i", "<C-k>", "<up>", { desc = "Move up in insert mode" })
 
+-- Map arrow keys to their respective movements in insert mode
+vim.keymap.set("i", "<left>", "<left>", { desc = "Move left in insert mode" })
+vim.keymap.set("i", "<down>", "<down>", { desc = "Move down in insert mode" })
+vim.keymap.set("i", "<up>", "<up>", { desc = "Move up in insert mode" })
+vim.keymap.set("i", "<right>", "<right>", { desc = "Move right in insert mode" })
