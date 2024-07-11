@@ -41,3 +41,33 @@ vim.keymap.set("i", "<left>", "<left>", { desc = "Move left in insert mode" })
 vim.keymap.set("i", "<down>", "<down>", { desc = "Move down in insert mode" })
 vim.keymap.set("i", "<up>", "<up>", { desc = "Move up in insert mode" })
 vim.keymap.set("i", "<right>", "<right>", { desc = "Move right in insert mode" })
+
+-- // Preview setting
+-- nnoremap gpd <cmd>lua require('goto-preview').goto_preview_definition()<CR>
+-- nnoremap gpt <cmd>lua require('goto-preview').goto_preview_type_definition()<CR>
+-- nnoremap gpi <cmd>lua require('goto-preview').goto_preview_implementation()<CR>
+-- nnoremap gpD <cmd>lua require('goto-preview').goto_preview_declaration()<CR>
+-- nnoremap gP <cmd>lua require('goto-preview').close_all_win()<CR>
+-- nnoremap gpr <cmd>lua require('goto-preview').goto_preview_references()<CR>
+-- -- vim.keymap.set("n", "gp", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>", { noremap = true })
+vim.keymap.set("n", "<leader>h", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>", { noremap = true })
+vim.keymap.set("n", "<leader>j", "<cmd>lua require('goto-preview').close_all_win()<CR>", { noremap = true })
+vim.keymap.set("n", "<leader>o", "<cmd>lua require('goto-preview').goto_preview_references()<CR>", { noremap = true })
+
+-- vim.keymap.set(
+-- 	"n",
+-- 	"<leader>o",
+-- 	"<cmd>lua require('goto-preview').goto_preview_type_definition()<CR>",
+-- 	{ noremap = true }
+-- )
+-- vim.keymap.set(
+-- 	"n",
+-- 	"<leader>o",
+-- 	"<cmd>lua require('goto-preview').goto_preview_implementation()<CR>",
+-- 	{ noremap = true }
+-- )
+-- vim.keymap.set("n", "<leader>o", "<cmd>lua require('goto-preview').goto_preview_declaration()<CR>", { noremap = true })
+
+-- LazyDocker setup
+
+vim.keymap.set("n", "<leader>k", "<cmd>LazyDocker<CR>", { desc = "Toggle LazyDocker", noremap = true, silent = true })
