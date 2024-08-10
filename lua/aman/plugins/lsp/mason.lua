@@ -37,6 +37,10 @@ return {
 				"emmet_ls",
 				"prismals",
 				"pyright",
+				"clangd",
+				-- "rust_analyzer",
+				-- "jsonls",
+				-- "yamlls",
 			},
 		})
 
@@ -47,6 +51,8 @@ return {
 				"isort", -- python formatter
 				"black", -- python formatter
 				"pylint",
+				"clang-format",
+				-- "eslint",
 				"eslint_d",
 			},
 		})
