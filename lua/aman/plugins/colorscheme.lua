@@ -2,7 +2,7 @@
 -- 	"folke/tokyonight.nvim",
 -- 	priority = 1000,
 -- 	config = function()
--- 		local transparent = false -- set to true if you would like to enable transparency
+-- 		local transparent = true -- set to true if you would like to enable transparency
 --
 -- 		local bg = "#011628"
 -- 		local bg_dark = "#011423"
@@ -51,6 +51,9 @@ return {
 		name = "catppuccin",
 		priority = 1000,
 		config = function()
+			require("catppuccin").setup({
+				transparent_background = true, -- Enable transparency
+			})
 			vim.cmd.colorscheme("catppuccin-mocha")
 		end,
 	},
