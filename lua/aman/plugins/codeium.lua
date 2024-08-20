@@ -45,5 +45,11 @@ return {
 		vim.keymap.set("i", "<c-x>", function()
 			return vim.fn["codeium#Clear"]()
 		end, { expr = true, silent = true })
+
+		-- Disable Codeium for specific file types
+		vim.g.codeium_filetypes = {
+			["cpp"] = false,
+			["c"] = false,
+		}
 	end,
 }
