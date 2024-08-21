@@ -1,4 +1,3 @@
--- To show indentation lines
 
 return {
 	"lukas-reineke/indent-blankline.nvim",
