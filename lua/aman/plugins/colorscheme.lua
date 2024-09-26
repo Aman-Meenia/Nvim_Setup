@@ -52,7 +52,7 @@ return {
 		priority = 1000,
 		config = function()
 			require("catppuccin").setup({
-				transparent_background = true, -- Enable transparency
+				transparent_background = false, -- Enable transparency
 			})
 			vim.cmd.colorscheme("catppuccin-mocha")
 		end,
