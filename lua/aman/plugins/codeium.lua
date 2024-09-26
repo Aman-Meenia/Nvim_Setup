@@ -50,6 +50,14 @@ return {
 		vim.g.codeium_filetypes = {
 			["cpp"] = false,
 			["c"] = false,
+			["javascript"] = false,
+			["typescript"] = false,
+			["javascriptreact"] = false,
+			["typescriptreact"] = false,
+			["js"] = false,
+			["ts"] = false,
+			["jsx"] = false,
+			["tsx"] = false,
 		}
 	end,
 }
