@@ -72,48 +72,85 @@ vim.keymap.set("n", "<leader>o", "<cmd>lua require('goto-preview').goto_preview_
 
 vim.keymap.set("n", "<leader>k", "<cmd>LazyDocker<CR>", { desc = "Toggle LazyDocker", noremap = true, silent = true })
 
--- vim.api.nvim_set_keymap("n", "<F5>", ":w<CR>:!g++ -o %:r %<CR>:!./%:r<CR>", { noremap = true, silent = false })
+local function compile_cpp(file_path, file_dir, file_name)
+	local compile_command = string.format('g++ -std=c++17 -o "%s/%s" "%s"', file_dir, file_name, file_path)
+	local compile_output = vim.fn.system(compile_command)
+	if vim.v.shell_error ~= 0 then
+		-- Create a new split window for error output
+		vim.cmd("botright split")
+		vim.cmd("enew")
+		local buf = vim.api.nvim_get_current_buf()
+		vim.api.nvim_buf_set_lines(buf, 0, -1, false, vim.split(compile_output, "\n"))
+		vim.api.nvim_buf_set_option(buf, "buftype", "nofile")
+		vim.api.nvim_buf_set_option(buf, "bufhidden", "wipe")
+		vim.api.nvim_buf_set_name(buf, "Compilation Error")
+		vim.cmd("normal! G")
+		print("Compilation failed. See error message in the split window.")
+		return false
+	end
+	return true
+end
 
--- Existing configuration (abbreviated for brevity)
--- ... [Previous configuration remains unchanged]
+local function run_cpp_with_io(file_dir, file_name)
+	local input_file = file_dir .. "/input.txt"
+	local output_file = file_dir .. "/output.txt"
 
--- LazyDocker setup
--- vim.keymap.set("n", "<leader>k", "<cmd>LazyDocker<CR>", { desc = "Toggle LazyDocker", noremap = true, silent = true })
+	-- Check if input.txt exists
+	if vim.fn.filereadable(input_file) == 0 then
+		print("input.txt not found. Creating an empty file.")
+		vim.fn.system(string.format('touch "%s"', input_file))
+	end
 
--- Function to compile and run C++ program in a new Wezterm window
+	-- Run the compiled program
+	local run_command = string.format('cd "%s" && ./%s < input.txt > output.txt 2>&1', file_dir, file_name)
+	vim.fn.system(run_command)
+
+	-- Check if output.txt buffer is already open
+	local output_buf = nil
+	for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+		if vim.api.nvim_buf_get_name(buf):match("output.txt$") then
+			output_buf = buf
+			break
+		end
+	end
+
+	if output_buf then
+		-- If output buffer exists, switch to its window
+		local win_id = vim.fn.bufwinid(output_buf)
+		if win_id ~= -1 then
+			vim.api.nvim_set_current_win(win_id)
+		else
+			-- If buffer exists but not in any window, open it in a vsplit
+			vim.cmd("vsplit")
+			vim.api.nvim_win_set_buf(0, output_buf)
+		end
+	else
+		-- If output buffer doesn't exist, create a new one
+		vim.cmd("vsplit " .. output_file)
+		output_buf = vim.api.nvim_get_current_buf()
+	end
+
+	-- Reload the content of the output buffer
+	vim.api.nvim_buf_set_option(output_buf, "buftype", "")
+	vim.cmd("edit!")
+	print("Program executed. Output saved to output.txt and displayed in split window.")
+end
+
 local function compile_and_run_cpp()
-	-- Save the current file
-	vim.cmd("write")
-
-	-- Get the full path of the current file and its directory
+	vim.cmd("write") -- Save the current file
 	local file_path = vim.fn.expand("%:p")
 	local file_dir = vim.fn.expand("%:p:h")
 	local file_name = vim.fn.expand("%:t:r")
 
-	-- Compile the C++ file
-	local compile_command = string.format('g++ -o "%s/%s" "%s"', file_dir, file_name, file_path)
-	local compile_output = vim.fn.system(compile_command)
-
-	-- Check if compilation was successful
-	if vim.v.shell_error ~= 0 then
-		-- If compilation failed, display the error in a split window
-		vim.cmd("split")
-		local lines = vim.split(compile_output, "\n")
-		vim.api.nvim_buf_set_lines(0, -1, -1, false, lines)
-		vim.cmd("normal! G")
-		print("Compilation failed. See error message above.")
-	else
-		-- If compilation succeeded, run the program in a new Wezterm window
-		local run_command = string.format("./%s", file_name)
-		local wezterm_command = string.format(
-			'wezterm start --cwd "%s" -- sh -c "%s; echo; echo Press any key to close...; read -n 1"',
-			file_dir,
-			run_command
-		)
-		vim.fn.system(wezterm_command)
-		print("Program running in a new Wezterm window.")
+	if compile_cpp(file_path, file_dir, file_name) then
+		run_cpp_with_io(file_dir, file_name)
 	end
 end
 
--- Map F5 to the compile_and_run_cpp function
-vim.keymap.set("n", "<leader>b", compile_and_run_cpp, { desc = "Compile and Run C++ in Wezterm", noremap = true })
+-- Map the key to the function
+vim.keymap.set(
+	"n",
+	"<Space>b",
+	compile_and_run_cpp,
+	{ desc = "Compile and Run C++ with input from input.txt and output to output.txt", noremap = true }
+)
