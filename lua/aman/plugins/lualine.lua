@@ -1,9 +1,10 @@
 return {
 	"nvim-lualine/lualine.nvim",
 	dependencies = { "nvim-tree/nvim-web-devicons" },
+	priority = 1000,
 	config = function()
 		local lualine = require("lualine")
-		local lazy_status = require("lazy.status") -- to configure lazy pending updates count
+		-- local lazy_status = require("lazy.status") -- to configure lazy pending updates count
 
 		local colors = {
 			blue = "#65d1FF",
@@ -55,6 +56,80 @@ return {
 				theme = my_lualine_theme,
 			},
 			sections = {
+				lualine_a = {
+					{
+						-- "mode",
+						-- function()
+						-- 	local filename = vim.fn.expand("%:t") -- Get just the filename
+						-- 	local first_letter = filename:sub(1, 1):upper() -- Get first letter and capitalize it
+						-- 	local rest_of_name = filename:sub(2) -- Get rest of the filename
+						-- 	if filename == "" then
+						-- 		return "" -- Return just icon if no file is open
+						-- 	else
+						-- 		return "" .. " " .. first_letter .. rest_of_name -- Return icon + space + capitalized filename
+						-- 	end
+						-- end,
+						-- 		icon = "",
+
+						function()
+							return "" -- Only the icon
+						end,
+
+						-- 				section_separators = { left = "", right = "" },
+						separator = { left = "", right = "" },
+						color = function()
+							local mode_color = {
+								n = "#5B7AB9", -- Normal mode
+								i = "#89B4FA", -- Insert mode
+								v = "#FEC2E7", -- Visual mode
+								V = "#FEC2E7", -- Visual Line mode
+								[""] = "#FEC2E7", -- Visual Block mode
+								c = "#FAB387", -- Command mode
+							}
+							return { bg = mode_color[vim.fn.mode()] or "#5B7AB9", fg = "#101322" }
+						end,
+					},
+				},
+
+				lualine_b = {
+					{
+						"filename",
+						-- icon = "",
+						separator = { left = "", right = "" },
+						color = {
+							fg = "#1c1d21",
+							bg = "#7d83ac",
+						},
+					},
+					-- {
+					-- 	"diff",
+					-- 	separator = { left = "", right = "" },
+					-- 	color = {
+					-- 		fg = "#1c1d21",
+					-- 		bg = "#7d83ac",
+					-- 	},
+					-- },
+				},
+				lualine_c = {
+					{
+						"diagnostics",
+						separator = { left = "", right = "" },
+						color = {
+							bg = "#45475a",
+						},
+					},
+				},
+				lualine_x = {},
+				lualine_y = {
+					{
+						"filetype",
+						icons_enabled = true,
+						color = {
+							fg = "#1C1D21",
+							bg = "#eba0ac",
+						},
+					},
+				},
 				-- lualine_x = {
 				-- 	{
 				-- 		lazy_status.updates,
@@ -66,7 +141,23 @@ return {
 				-- 	{ "filetype" },
 				-- },
 				-- lualine_z = { "filename" },
-				lualine_z = { "filename" },
+				lualine_z = {
+					{
+						"branch",
+						icon = "",
+						color = function()
+							local mode_color = {
+								n = "#5B7AB9", -- Normal mode
+								i = "#89B4FA", -- Insert mode
+								v = "#FEC2E7", -- Visual mode
+								V = "#FEC2E7", -- Visual Line mode
+								[""] = "#FEC2E7", -- Visual Block mode
+								c = "#FAB387", -- Command mode
+							}
+							return { bg = mode_color[vim.fn.mode()] or "#5B7AB9", fg = "#101322" }
+						end,
+					},
+				},
 			},
 		})
 	end,

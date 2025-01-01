@@ -9,6 +9,9 @@ local keymap = vim.keymap -- for conciseness
 -- use jk to exit insert mode
 keymap.set("i", "jk", "<ESC>", { desc = "Exit insert mode with jk" })
 
+-- use leader + o to enter visual mode
+vim.keymap.set("n", "<leader>o", "v", { noremap = true, silent = true, desc = "Enter visual mode" })
+
 -- clear search highlights
 keymap.set("n", "<leader>nh", ":nohl<CR>", { desc = "Clear search highlights" })
 
@@ -43,16 +46,9 @@ vim.keymap.set("i", "<up>", "<up>", { desc = "Move up in insert mode" })
 vim.keymap.set("i", "<right>", "<right>", { desc = "Move right in insert mode" })
 
 -- // Preview setting
--- nnoremap gpd <cmd>lua require('goto-preview').goto_preview_definition()<CR>
--- nnoremap gpt <cmd>lua require('goto-preview').goto_preview_type_definition()<CR>
--- nnoremap gpi <cmd>lua require('goto-preview').goto_preview_implementation()<CR>
--- nnoremap gpD <cmd>lua require('goto-preview').goto_preview_declaration()<CR>
--- nnoremap gP <cmd>lua require('goto-preview').close_all_win()<CR>
--- nnoremap gpr <cmd>lua require('goto-preview').goto_preview_references()<CR>
--- -- vim.keymap.set("n", "gp", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>", { noremap = true })
 vim.keymap.set("n", "<leader>h", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>", { noremap = true })
 vim.keymap.set("n", "<leader>j", "<cmd>lua require('goto-preview').close_all_win()<CR>", { noremap = true })
-vim.keymap.set("n", "<leader>o", "<cmd>lua require('goto-preview').goto_preview_references()<CR>", { noremap = true })
+-- vim.keymap.set("n", "<leader>o", "<cmd>lua require('goto-preview').goto_preview_references()<CR>", { noremap = true })
 
 -- vim.keymap.set(
 -- 	"n",
@@ -73,7 +69,7 @@ vim.keymap.set("n", "<leader>o", "<cmd>lua require('goto-preview').goto_preview_
 vim.keymap.set("n", "<leader>k", "<cmd>LazyDocker<CR>", { desc = "Toggle LazyDocker", noremap = true, silent = true })
 
 local function compile_cpp(file_path, file_dir, file_name)
-	local compile_command = string.format('g++ -std=c++17 -o "%s/%s" "%s"', file_dir, file_name, file_path)
+	local compile_command = string.format('g++ -std=c++20 -o "%s/%s" "%s"', file_dir, file_name, file_path)
 	local compile_output = vim.fn.system(compile_command)
 	if vim.v.shell_error ~= 0 then
 		-- Create a new split window for error output

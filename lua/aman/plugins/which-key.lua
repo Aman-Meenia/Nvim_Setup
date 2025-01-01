@@ -24,6 +24,12 @@ return {
 		require("which-key").setup(setup)
 	end,
 	opts = {
+		triggers = { "<leader>" },
+		disable = {
+			filetypes = {},
+			buftypes = {},
+			keys = { "o" },
+		},
 
 		-- your configuration comes here
 		-- or leave it empty to use the default settings
