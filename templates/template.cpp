@@ -1,10 +1,13 @@
-/*Author : Aman Meenia Created : Fri Dec 20 19 : 40 : 04 IST 2024 * /
+/*
+ Author: Aman Meenia
+ Created: Tue Dec 31 16:41:07 IST 2024
+ */
 #include <bits/stdc++.h>
 #define int long long
 #define ll long long
 #define mod 1000000007
 #define pb push_back
-                                    using namespace std;
+using namespace std;
 mt19937_64 RNG(chrono::steady_clock::now().time_since_epoch().count());
 
 // <------------------------------ START CODE --------------------->
