@@ -1,5 +1,6 @@
 return {
 	"nvim-telescope/telescope.nvim",
+	-- tag = "0.1.8",
 	branch = "0.1.x",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
@@ -10,20 +11,11 @@ return {
 	config = function()
 		local telescope = require("telescope")
 		local actions = require("telescope.actions")
-		-- local trouble = require("trouble")
-		-- local trouble_telescope = require("trouble.providers.telescope")
-		-- local actions = require("telescope.actions")
-		-- local open_with_trouble = require("trouble.sources.telescope").open
 
-		-- Use this to add more results without clearing the trouble list
-		-- local add_to_trouble = require("trouble.sources.telescope").add
-		-- local actions = require("telescope.actions")
+		-- 🎨 Set custom colors for the search bar
+		vim.api.nvim_set_hl(0, "TelescopePromptTitle", { fg = "#91594C", bold = true }) -- Search bar title color
+		vim.api.nvim_set_hl(0, "TelescopePromptBorder", { fg = "#91594C" }) -- Border color
 		local open_with_trouble = require("trouble.sources.telescope").open
-
-		-- Use this to add more results without clearing the trouble list
-		local add_to_trouble = require("trouble.sources.telescope").add
-
-		-- local telescope = require("telescope")
 
 		telescope.setup({
 			defaults = {
@@ -32,14 +24,19 @@ return {
 					n = { ["<c-t>"] = open_with_trouble },
 				},
 			},
+			pickers = {
+				find_files = {
+					-- theme = "ivy",
+				},
+			},
+			extensions = {
+				fzf = {},
+			},
 		})
-		-- local config = require("fzf-lua.config")
-		-- local actions = require("trouble.sources.fzf").actions
-		-- config.defaults.actions.files["ctrl-t"] = actions.open
 
 		telescope.setup({
 			defaults = {
-				path_display = { "smart" },
+				-- path_display = { "smart" },
 				mappings = {
 					i = {
 						["<C-k>"] = actions.move_selection_previous, -- move to prev result
@@ -54,7 +51,7 @@ return {
 		telescope.load_extension("fzf")
 
 		-- set keymaps
-		local keymap = vim.keymap -- for conciseness
+		local keymap = vim.keymap
 
 		keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Fuzzy find files in cwd" })
 		keymap.set("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", { desc = "Fuzzy find recent files" })
