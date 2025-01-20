@@ -26,7 +26,16 @@ return {
 			},
 			pickers = {
 				find_files = {
-					-- theme = "ivy",
+					theme = "ivy",
+					hidden = true, -- Show hidden files
+					file_ignore_patterns = {
+						"node_modules/.*",
+						".git/.*",
+						".dockerignore/.*",
+						-- Add any other patterns you want to ignore
+					},
+					-- Find .env files by adding no_ignore = true
+					no_ignore = true,
 				},
 			},
 			extensions = {
