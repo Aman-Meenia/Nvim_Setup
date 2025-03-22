@@ -1,6 +1,12 @@
 vim.cmd("let g:netrw_liststyle = 3")
 local opt = vim.opt -- for conciseness
 
+-- Set maximum line length indicator
+opt.colorcolumn = "100" -- Shows a vertical line at column 100
+
+-- Optional: set text width to automatically wrap at 100 characters
+opt.textwidth = 100 -- Automatically wrap text at 100 characters when inserting text
+
 -- line numbers
 opt.relativenumber = true -- show relative line numbers
 opt.number = true -- shows absolute line number on cursor line (when relative number is on)

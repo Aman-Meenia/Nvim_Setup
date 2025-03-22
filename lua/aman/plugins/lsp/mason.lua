@@ -47,33 +47,33 @@ return {
 				"emmet_ls",
 				"prismals",
 				"pyright",
-				"clangd",
+				-- "clangd",
 			},
 		})
 
 		-- TO NOT SHOW ANY WARNING MESSAGE FOR CLANGD
-		lspconfig.clangd.setup({
-			on_attach = lsp_on_attach,
-			cmd = {
-				"clangd",
-				-- "--std=c++20",
-				"--log=error",
-				"--header-insertion=never",
-				"--completion-style=detailed",
-			},
-			handlers = {
-				["textDocument/publishDiagnostics"] = function() end, -- Disable diagnostics
-			},
-			capabilities = {
-				textDocument = {
-					completion = {
-						completionItem = {
-							snippetSupport = true,
-						},
-					},
-				},
-			},
-		})
+		-- lspconfig.clangd.setup({
+		-- 	on_attach = lsp_on_attach,
+		-- 	cmd = {
+		-- 		"clangd",
+		-- 		-- "--std=c++20",
+		-- 		"--log=error",
+		-- 		"--header-insertion=never",
+		-- 		"--completion-style=detailed",
+		-- 	},
+		-- 	handlers = {
+		-- 		["textDocument/publishDiagnostics"] = function() end, -- Disable diagnostics
+		-- 	},
+		-- 	capabilities = {
+		-- 		textDocument = {
+		-- 			completion = {
+		-- 				completionItem = {
+		-- 					snippetSupport = true,
+		-- 				},
+		-- 			},
+		-- 		},
+		-- 	},
+		-- })
 
 		-- require("lspconfig").clangd.setup({
 		-- 	on_attach = lsp_on_attach,
