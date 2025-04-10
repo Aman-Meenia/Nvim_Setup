@@ -3,8 +3,15 @@ local opt = vim.opt -- for conciseness
 
 opt.undofile = true
 opt.undodir = vim.fn.expand("~/.undodir")
+
 -- Set maximum line length indicator
 opt.colorcolumn = "100" -- Shows a vertical line at column 100
+vim.api.nvim_create_autocmd("ColorScheme", {
+	pattern = "*",
+	callback = function()
+		vim.api.nvim_set_hl(0, "colorcolumn", { bg = "#2E2C47" })
+	end,
+})
 
 -- Optional: set text width to automatically wrap at 100 characters
 opt.textwidth = 100 -- Automatically wrap text at 100 characters when inserting text
@@ -35,8 +42,9 @@ opt.incsearch = true
 -- cursor line
 opt.cursorline = true -- highlight the current cursor line
 opt.virtualedit = "block" -- Allow cursor to move where there is no text in visual block mode
-opt.cursorlineopt = "number"
-vim.cmd([[highlight LineNr guifg=#FFA500]]) -- Orange for all relative line numbers
+-- opt.cursorlineopt = "number"
+-- opt.cursorline = true
+opt.cursorlineopt = "both"
 
 -- appearance
 
@@ -62,6 +70,7 @@ opt.swapfile = false
 vim.api.nvim_create_autocmd("ColorScheme", {
 	pattern = "*",
 	callback = function()
+		vim.api.nvim_set_hl(0, "CursorLine", { bg = "#2E2C47" }) -- #313245
 		vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "#91594C", bold = true })
 	end,
 })

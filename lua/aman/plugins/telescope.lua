@@ -70,6 +70,7 @@ return {
 		local keymap = vim.keymap
 
 		keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Fuzzy find files in cwd" })
+		keymap.set("n", "<leader>j", "<cmd>Telescope find_files<cr>", { desc = "Fuzzy find files in cwd" })
 		keymap.set("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", { desc = "Fuzzy find recent files" })
 		keymap.set("n", "<leader>fs", "<cmd>Telescope live_grep<cr>", { desc = "Find string in cwd" })
 		keymap.set("n", "<leader>ft", "<cmd>TodoTelescope<cr>", { desc = "Find todos" })
@@ -83,7 +84,7 @@ return {
 		keymap.set("n", "<leader>fh", "<cmd>Telescope lsp_document_symbols<cr>", {
 			desc = "Document symbols",
 		})
-		keymap.set("n", "<leader>fj", function()
+		keymap.set("n", "<leader>k", function()
 			require("telescope.builtin").buffers({
 				sort_mru = true,
 				sort_lastused = false,
