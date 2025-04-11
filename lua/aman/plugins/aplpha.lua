@@ -1,5 +1,7 @@
 return {
 	"goolord/alpha-nvim",
+	priority = 1000,
+	event = "VimEnter",
 	dependencies = {
 		"nvim-tree/nvim-web-devicons",
 	},
