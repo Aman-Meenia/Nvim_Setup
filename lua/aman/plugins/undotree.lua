@@ -1,6 +1,5 @@
 return {
 	"mbbill/undotree",
-	event = "VeryLazy",
 	keys = {
 		{ "<leader>fu", "<cmd>UndotreeToggle<CR>", desc = "Toggle UndoTree" },
 	},

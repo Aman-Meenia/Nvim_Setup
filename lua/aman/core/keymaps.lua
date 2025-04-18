@@ -66,7 +66,7 @@ vim.keymap.set("n", "<leader>h", "<cmd>lua require('goto-preview').close_all_win
 
 -- LazyDocker setup
 
-vim.keymap.set("n", "<leader>lg", "<cmd>LazyDocker<CR>", { desc = "Toggle LazyDocker", noremap = true, silent = true })
+vim.keymap.set("n", "<leader>ld", "<cmd>LazyDocker<CR>", { desc = "Toggle LazyDocker", noremap = true, silent = true })
 
 local function compile_cpp(file_path, file_dir, file_name)
 	local compile_command = string.format('g++ -std=c++20 -o "%s/%s" "%s"', file_dir, file_name, file_path)

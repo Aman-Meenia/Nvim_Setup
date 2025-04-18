@@ -1,6 +1,6 @@
 return {
 	"crnvl96/lazydocker.nvim",
-	event = "VeryLazy",
+	cmd = { "LazyDocker" }, -- Load only when this command is run
 	opts = {}, -- automatically calls `require("lazydocker").setup()`
 	dependencies = {
 		"MunifTanjim/nui.nvim",
