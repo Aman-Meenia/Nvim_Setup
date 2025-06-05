@@ -58,6 +58,7 @@ return {
 			["ts"] = false,
 			["jsx"] = false,
 			["tsx"] = false,
+			["python"] = false,
 		}
 	end,
 }

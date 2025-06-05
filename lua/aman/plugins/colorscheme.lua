@@ -52,9 +52,22 @@ return {
 		priority = 1000,
 		config = function()
 			require("catppuccin").setup({
-				transparent_background = false, -- Enable transparency
+				transparent_background = true, -- Enable transparency
 			})
 			vim.cmd.colorscheme("catppuccin-mocha")
 		end,
 	},
 }
+
+-- return {
+-- 	{
+-- 		"bluz71/vim-moonfly-colors",
+-- 		name = "moonfly",
+-- 		lazy = false,
+-- 		priority = 1000,
+-- 		config = function()
+-- 			vim.g.moonflyTransparent = false
+-- 			vim.cmd("colorscheme moonfly")
+-- 		end,
+-- 	},
+-- }

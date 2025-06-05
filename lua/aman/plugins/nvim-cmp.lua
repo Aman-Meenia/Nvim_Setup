@@ -135,23 +135,6 @@ return {
 			},
 		})
 
-		-- AutoComplete buffer setup
-		-- require("cmp").setup({
-		--   sources = {
-		--     { name = "buffer" },
-		--   },
-		-- })
-		-- cmp.setup({
-		--   sources = {
-		--     {
-		--       name = "buffer",
-		--       option = {
-		--         -- Options go into this table
-		--       },
-		--     },
-		--   },
-		-- })
-
 		-- AutoComplete cmdline setup
 		cmp.setup.cmdline("/", {
 			mapping = cmp.mapping.preset.cmdline(),

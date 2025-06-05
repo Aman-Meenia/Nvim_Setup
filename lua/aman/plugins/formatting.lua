@@ -19,13 +19,21 @@ return {
 				graphql = { "prettier" },
 				liquid = { "prettier" },
 				lua = { "stylua" },
-				python = { "isort", "black" },
+				-- python = { "isort", "black" },
+				python = { "ruff_fix", "ruff_format" },
+				-- python = {
+				-- 	{
+				-- 		command = "ruff",
+				-- 		args = { "check", "--fix", "--ignore", "F401,F841", "--select", "E,F" }, -- Ignore unused imports and variables
+				-- 	},
+				-- 	"ruff_format",
+				-- },
 				cpp = { "clang-format" },
 			},
 			format_on_save = {
 				lsp_fallback = true,
 				async = false,
-				timeout_ms = 3000,
+				timeout_ms = 500,
 			},
 		})
 
@@ -33,7 +41,7 @@ return {
 			conform.format({
 				lsp_fallback = true,
 				async = false,
-				timeout_ms = 2500,
+				timeout_ms = 500,
 			})
 		end, { desc = "Format file or range (in visual mode)" })
 	end,

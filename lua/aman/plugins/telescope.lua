@@ -26,7 +26,11 @@ return {
 			},
 			pickers = {
 				find_files = {
-					theme = "ivy",
+					theme = "dropdown",
+					previewer = false,
+					layout_config = {
+						height = 0.6, -- Shows ~20 results depending on your screen
+					},
 				},
 				spell_suggest = { theme = "ivy" },
 				git_status = { theme = "ivy" },
@@ -36,7 +40,13 @@ return {
 				current_buffer_fuzzy_find = { theme = "ivy" },
 				lsp_document_symbols = { theme = "ivy" },
 				buffers = {
-					theme = "ivy",
+					-- theme = "ivy",
+					theme = "dropdown",
+					previewer = false,
+					layout_config = {
+						height = 0.6, -- Shows ~20 results depending on your screen
+					},
+
 					-- path_display = function(_, path)
 					-- 	local utils = require("telescope.utils")
 					-- 	local tail = utils.path_tail(path)
@@ -88,14 +98,17 @@ return {
 		keymap.set("n", "<leader>fh", "<cmd>Telescope lsp_document_symbols<cr>", {
 			desc = "Document symbols",
 		})
+		keymap.set("n", "<leader>fq", "<cmd>Telescope quickfix<cr>", {
+			desc = "Quick Fix",
+		})
 		keymap.set("n", "<leader>k", function()
 			require("telescope.builtin").buffers({
 				sort_mru = true,
 				sort_lastused = false,
 				initial_mode = "normal",
-				layout_config = {
-					preview_width = 0.45,
-				},
+				-- layout_config = {
+				-- 	preview_width = 0.45,
+				-- },
 			})
 		end, { desc = "Find open buffers" })
 	end,
